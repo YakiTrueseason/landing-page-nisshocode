@@ -15,6 +15,7 @@ html{
 body{
     color: #24292e;
     font-family: "sawarabi Gothic";
+    margin: 0;
 }
 
 a{
@@ -25,15 +26,9 @@ p{
     font-size: 1.3rem;
 }
 
-img{
-    max-width: 100%;  /* スマホサイズでも画像が縮小される。 */
+h2{
+    color: brown;
 }
-
-li{
-    list-style: none;
-    font-size: 1.2rem;
-}
-
 /* wrapperは共通 */
 .wrapper{
     max-width: 960px;
@@ -44,7 +39,7 @@ li{
 .site-title{
     line-height: 1px;
     font-weight: 600;
-    font-size: 2.4rem;
+    font-size: 0.8rem;
 }
 
 .site-title a{
@@ -59,53 +54,103 @@ li{
 /*----------------------------------- 
 ヘッダー 
 ------------------------------------*/
-#header{
-    max-width: 960px;
-    display: flex; /* 横並び */
-    align-items: center;
-    justify-content: space-between;
-    height: 170px;
-    margin: 0 auto;
-    padding: 0 4%;
+.container {/*ＬＰ必須*/
+max-width: 1000px;
+margin: 0 auto;
+padding: 0 20px;
+}
+.header {
+position: sticky;/*スクロールすると上にくっつく*/
+top: 0;/*画面の一番上に固定*/
+height: 70px;
+background: rgba(255,255,255,0.9);/*少し透明にする*/
+backdrop-filter: blur(10px);/*背景をぼかす*/
+box-shadow: 0 2px 10px rgba(0,0,0,0.1);/*下に影を作り出す*/
+z-index: 100;/*他の要素より前に置く*/
 }
 
-#header ul{
-    display: flex;
-    padding: 10px 0;
-    align-items: center;
+.header .container {
+height: 100%;
+display: flex;
+align-items: center;
+justify-content: space-between;
 }
 
-#header li{
-    font-size: 0.9rem;
-    margin-left: 30px;
+/* ----------
+ロゴ 
+-----------*/
+.logo a {
+text-decoration: none;
+color: br;
+font-weight: bold;
+font-size: 20px;
+color: brown;
 }
 
-header li a{
-    color: #24292e;
-    transition: all 0.3ms;
+/*----------- 
+nav
+-------------- */
+section{
+    scroll-margin-top: 100px;
+}
+.nav ul {
+display: flex;
+gap: 25px;
+list-style: none;
+margin: 0;
+padding: 0;
 }
 
-#header li a:hover{
+.nav a {
+text-decoration: none;
+color: orange;
+font-weight: 500;
+}
+
+.nav a:hover {
+color: red;
+}
+.icon img{
+    width: 20px;
+    vertical-align: middle;/*文字とズレない*/
     opacity: 0.5;
+    transition: 0.3s;
 }
-
-#header li img.icon{
-    width: 30px;
+.icon img:hover{
+    opacity: 1;
 }
-
-
-/* main */
-#mainvisual{
+/* -----------
+main
+-------------- */
+.slider{
     margin-bottom: 80px;
-}
-
-#mainvisual img{
+    overflow: hidden;/*見える部分だけ表示*/
     width: 100%;
-    max-width: 1920px;
-    height: 400px;
-    object-fit: cover;
 }
-
+.slide-track {
+    display: flex;
+    width: max-content;/*中身の長さ分だけ広がる*/
+    animation: scroll 50s linear infinite reverse;/*アニメーションを50秒で1周、一定速度で無限ループ　逆方向*/
+}
+.slide-track img{
+    width: 300px;
+    height: 400px;
+    margin-right: 20px;/*間隔*/
+    border-radius: 10px;
+    object-fit: cover;
+} 
+.slide-track:hover{
+    animation-play-state: paused; /*ホバーで止まる（画像）UX*/
+}
+/* アニメーション 横に動いてループしているように見せる*/
+@keyframes scroll {
+0% {
+    transform: translateX(0);/*現在の位置*/
+}
+100% {
+    transform: translateX(-50%);/*左に50％移動*/
+}
+}
 /*----------------------------------- 
 About 
 --------------------------------------*/
@@ -122,36 +167,77 @@ About
 }
 
 #about p{
-    text-align: justify;
+    text-align: center;
 }
-
+#about h3 {
+    text-align: center;
+}
 /*-------------------------------------- 
-works 
+foods 
 ---------------------------------------*/
-#works ul{
+#foods ul{
     display: flex;
     justify-content: space-between;
-    flex-wrap: wrap;
-    margin-bottom: 50px;
+    flex-wrap: wrap; /*折り返されない*/
+    padding: 0;
 }
 
-#works ul li{
-    width: 31%;
-    margin-bottom: 23px;
+#foods ul li{
+    width: 32%;
+    list-style: none;
+    margin-bottom: 25px;
+    overflow: hidden;
 }
 
-#works ul li img{
-    cursor: pointer;
-    width: 640px;
-    max-height: 417px;
+#foods ul li img{
+    width: 100%;
+    height: 250px;
+    object-fit: cover; /*画像サイズバラバラでも揃う*/
+    display: block;
     transition: all 0.3s;
 }
 
-#works ul li img:hover{
+#foods ul li img:hover{
     transform: scale(1.2,1.2);
     opacity: 0.7;
 }
-
+/* ハンバーガーメニュー */
+.hamburger{
+    display: none;
+    font-size: 24px;
+    cursor: pointer;
+}
+/* 背景 */
+.modal{
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.6);
+    justify-content: center;
+    align-items: center;
+}
+/* 中身 */
+.modal-content{
+    background: white;
+    border-radius: 10px;
+    text-align: center;
+    padding: 20px;
+    width: 300px;
+}
+/* 画像 */
+.modal-content img{
+    width: 100%;
+    border-radius: 10px;
+}
+/* 閉じるボタン */
+.close{
+    cursor: pointer;
+    font-size: 20px;
+    float: right;
+}
 /*------------------------------------ 
 News 
 --------------------------------------*/
@@ -224,41 +310,54 @@ contact
     background: #fff;
     color: #24292e;
 }
+#return{
+    text-align: center;
+}
 /*------------------------------------- 
 sp 
 ---------------------------------------*/
 /* pcファースト 大きいサイズから小さいサイズへ */
 /* 600pxより小さいときのCSS適用 */
 @media screen and (max-width:600px){
-    .site-title{
-        margin-top: 20px;
-    }
     /* ヘッダー */
-    
-    #header{
-        flex-direction: column;
-        height: auto;
-        margin-top: 20px;
-        line-height: 40px;
-    }
-
-    #header li{
-        font-size: 0.8rem;
-        margin-left: 20px;
-    }
-
-    header li img.icon{
-        width: 20px;
-        margin-top: 15px;
-    }
-
-    /* works */
-    #works ul{
-        flex-direction: column
-    }
-
-    #works ul li{
-        width: 100%
+.nav {
+    position: absolute;
+    top: 70px;
+    left: 0;
+    width: 100%;
+    background: white;
+    display: none;
+    transform: all 0.3s ease;
+}
+.nav ul {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0;
+}
+.nav ul li{
+    width: 100%;
+    text-align: center;
+    border-bottom: 1px solid #eee;
+    padding: 10px 0;
+}
+.nav a{
+    font-size: 16px;
+}
+.nav.active {
+    display: block;
+}
+/* ハンバーガーメニュー */
+.hamburger{
+    display: block;
+}
+/* about */
+#about ul li{
+    text-align: center;
+}
+    /* foods */
+    #foods ul li{
+        width: 48%; /*2列ずつ*/
     }
 
     /* news */
@@ -277,8 +376,9 @@ sp
         padding-top: 0;
     }
     /* contact */
-    #contact dt{
+    #contact dl{
     flex-direction: column;
+    text-align: center;
     }
 
     #contant dt{
