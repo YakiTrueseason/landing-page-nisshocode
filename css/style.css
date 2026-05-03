@@ -156,21 +156,21 @@ About
 --------------------------------------*/
 #about ul{
     margin-bottom: 30px;
+    list-style: none;
 }
 
 #about ul li{
     margin-bottom: 3px;
+    text-align: center;
+    border-bottom: 1px dotted black;
+    padding: 5px ;
 }
 
-#about ul li:first-child{
-    margin-bottom: 30px;
-}
-
-#about p{
+#about h3{
     text-align: center;
 }
-#about h3 {
-    text-align: center;
+#about h4 {
+    color:  black;
 }
 /*-------------------------------------- 
 foods 

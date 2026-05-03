@@ -14,6 +14,16 @@ function openModal(title, text, imgSrc){
 function closeModal(){
     document.getElementById("modal").style.display = "none"; /*閉じる*/
 }
+
+const modal = document.getElementById("modal");
+const modalContent = document.querySelector("modal-content");
+
+modal.addEventListener("click",()=>{ /*背景クリック*/
+    closeModal();
+});
+modalContent.addEventListener("click",(e)=>{ /*本体クリック*/
+    e.stopPropagation();
+});
 // ハンバーガーメニュー
 function toggleMenu(){
     document.querySelector(".nav").classList.toggle("active");//クラスをON/OFFするスイッチ
